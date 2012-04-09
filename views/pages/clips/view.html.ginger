@@ -1,0 +1,37 @@
+{% if ajax %}{% extends "layout_ajax.html" %}{% else %}{% extends "layout.html" %}{% endif %}
+
+{% block "content" %}
+<table class="table table-bordered">
+  <tr>
+    <th width="1%">Name</th>
+    <td><a href="/clips/{{ clip.id }}">{{ clip.name }}</a></td>
+  </tr>
+  <tr>
+    <th width="1%">Created By</th>
+    <td><a href="/{{ clip.created_by }}">{{ clip.created_by }}</a></td>
+  </tr>
+  <tr>
+    <th width="1%">Created At</th>
+    <td>{{ clip.created_at|nice_time }}</td>
+  </tr>
+  <tr>
+    <th width="1%">Play</th>
+    <td>
+      <audio controls="controls">
+{% for format in clip.formats %}
+        <source src="/download/{{ clip.id }}.{{ format }}" type="audio/{{ format }}">
+{% endfor %}
+        Oh no! Your browser doesn't support native audio!
+      </audio>
+    </td>
+  </tr>
+  <tr>
+    <th width="1%">Download</th>
+    <td>
+{% for format in clip.formats %}
+      <a href="/download/{{ clip.id }}.{{ format }}">{{ format }}</a>
+{% endfor %}
+    </td>
+  </tr>
+</table>
+{% endblock %}
