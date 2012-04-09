@@ -1,0 +1,15 @@
+{% if ajax %}{% extends "layout_ajax.html" %}{% else %}{% extends "layout.html" %}{% endif %}
+
+{% block "content" %}
+<div class="hero-unit">
+  <h1>Riff Mint</h1>
+
+  <p>
+    This would normally be a description.
+  </p>
+
+  <p>
+    <a class="btn btn-primary btn-large ajax" href="/learn-more">Learn More</a>
+  </p>
+</div>
+{% endblock %}

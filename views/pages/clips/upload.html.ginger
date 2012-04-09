@@ -1,0 +1,17 @@
+{% if ajax %}{% extends "layout_ajax.html" %}{% else %}{% extends "layout.html" %}{% endif %}
+
+{% block "content" %}
+<form class="well" action="/clips" method="post" enctype="multipart/form-data">
+  <fieldset>
+    <label>Name</label>
+    <input type="text" name="name">
+
+    <label>File</label>
+    <input type="file" name="file">
+
+    <br>
+
+    <button type="submit" class="btn">Upload</button>
+  </fieldset>
+</form>
+{% endblock %}

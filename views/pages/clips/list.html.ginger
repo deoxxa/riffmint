@@ -1,0 +1,31 @@
+{% if ajax %}{% extends "layout_ajax.html" %}{% else %}{% extends "layout.html" %}{% endif %}
+
+{% block "content" %}
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>What</th>
+      <th>Who</th>
+      <th>When</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for clip in clips %}
+    <tr>
+      <td><a href="/clips/{{ clip.id }}">{{ clip.name }}</a></td>
+      <td><a href="/{{ clip.created_by }}">{{ clip.created_by }}</a></td>
+      <td>{{ clip.created_at|nice_time }}</td>
+      <td>
+        <audio controls="controls" preload="metadata">
+{% for format in clip.formats %}
+          <source src="/download/{{ clip.id }}.{{ format }}" type="audio/{{ format }}">
+{% endfor %}
+          Oh no! Your browser doesn't support native audio!
+        </audio>
+      </td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endblock %}
